@@ -1,4 +1,6 @@
 package Core;
+
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -6,10 +8,11 @@ import java.sql.SQLException;
 public class Db {
     //Singleton Design Pattern
     private static Db instance = null;
-    private Connection connection = null;
-    private final String DB_URL = "jdbc:postgresql://localhost:5432/rentacar";
-    private final String DB_USERNAME = "postgres";
-    private final String DB_PASS = "postgres";
+    Connection connection = null;
+    public static final String DB_URL = "jdbc:postgresql://localhost:5432/rentacar";
+    public static final String DB_USERNAME = "postgres";
+    public static final String DB_PASS = "postgres";
+
     private Db(){
         try {
             this.connection = DriverManager.getConnection(DB_URL,DB_USERNAME,DB_PASS);
@@ -21,10 +24,10 @@ public class Db {
         return connection;
     }
 
-    public static Connection getInstance() { // geriye connection döndürür. Singleton Design Pattern i uyguladık
+    public static Connection getInstance() { // Singleton Design Pattern i uyguladık
        try{
            if (instance == null || instance.getConnection().isClosed()){
-               instance = new Db();
+               instance = new Db(); //yeni connection oluşturuyor
            }
 
        }catch (SQLException e){
