@@ -17,19 +17,21 @@ public class BrandView extends Layout{
     private Brand brand;
     private BrandManager brandManager;
     public BrandView(Brand brand){
+
         this.brandManager = new BrandManager();
         this.add(container);
         this.guiInitilaze(300,200);
         this.brand = brand;
 
         if (brand != null){
-            this.fld_brand_name.setText(brand.getName());
+            this.fld_brand_name.setText(brand.getName()); //tablodaki marka ismiyle değişken ismini eşle
         }
         btn_brand_save.addActionListener(e -> {
             if(Helper.isFieldEmpty(this.fld_brand_name)){
                 Helper.showMsg("fill");
             }else{
                 boolean result;
+
                 if( this.brand == null){
                     Brand obj = new Brand(fld_brand_name.getText());
                     result = this.brandManager.save(obj);

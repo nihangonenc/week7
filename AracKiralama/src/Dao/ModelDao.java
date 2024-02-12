@@ -16,7 +16,7 @@ public class ModelDao {
     public ModelDao() {
         this.con = Db.getInstance();
     }
-    public Model getById(int id) {
+    public Model getById(int id) { //id'ye göre model objesi döndürür
         Model obj = null;
         String query = "SELECT * FROM public.model WHERE (model_id) = ?";
         try {
@@ -31,13 +31,13 @@ public class ModelDao {
         }
         return obj;
     }
-    public ArrayList<Model> findAll(){
+    public ArrayList<Model> findAll(){  //veritabanından tüm model kayıtları çekip arraylistte depoladık
         return this.selectByQuery("SELECT * FROM public.model ORDER BY model_id ASC");
     }
-    public ArrayList<Model> getByListBrandId(int brandId){
+    public ArrayList<Model> getByListBrandId(int brandId){ // marka id'ye göre model listesi döndürür
         return this.selectByQuery("SELECT * FROM public.model WHERE model_brand_id = " + brandId);
     }
-    public ArrayList<Model> selectByQuery(String query) {
+    public ArrayList<Model> selectByQuery(String query) { //sorguya uygun model listesi döndürür
         ArrayList<Model> modelList = new ArrayList<>();
         try {
             ResultSet rs = this.con.createStatement().executeQuery(query);
@@ -49,7 +49,7 @@ public class ModelDao {
         }
         return modelList;
     }
-    public boolean save(Model model) {
+    public boolean save(Model model) { //model kaydı
         String query = "INSERT INTO public.model " +
                 "(" +
                 "model_brand_id," +
@@ -76,7 +76,7 @@ public class ModelDao {
         }
         return true;
     }
-    public boolean update(Model model) {
+    public boolean update(Model model) { //model güncelleme
         String query = "UPDATE public.model SET " +
                 "model_brand_id = ? , " +
                 "model_name = ? , " +
@@ -101,7 +101,7 @@ public class ModelDao {
         }
         return true;
     }
-    public boolean delete(int id) {
+    public boolean delete(int id) { //model silme
         String query = "DELETE FROM public.model WHERE model_id = ?";
         try {
             PreparedStatement ps = this.con.prepareStatement(query);
@@ -113,7 +113,7 @@ public class ModelDao {
         }
         return true;
     }
-    public Model match(ResultSet rs) throws SQLException {
+    public Model match(ResultSet rs) throws SQLException { //veritabanı verilerini uygulamanın içinde kullanılabilir bir nesne tipine dönüştürmek için
         Model model = new Model();
         model.setId(rs.getInt("model_id"));
         model.setName(rs.getString("model_name"));

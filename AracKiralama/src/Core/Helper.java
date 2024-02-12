@@ -1,9 +1,11 @@
 package Core;
 import javax.swing.*;
 import java.awt.*;
+import javax.print.attribute.standard.JobStateReason;
+
 
 public class Helper {
-    public static void setTheme(){
+    public static void setTheme(){ //tema belirler
 
         for (UIManager.LookAndFeelInfo info: UIManager.getInstalledLookAndFeels()){
             if("Nimbus".equals(info.getName())){
@@ -16,7 +18,7 @@ public class Helper {
             }
         }
     }
-    public static void showMsg(String str){
+    public static void showMsg(String str){ //kullanıcıya gösterilecek mesajlar yazıldı
         optionPaneTR();
         String msg;
         String title;
@@ -44,7 +46,6 @@ public class Helper {
         JOptionPane.showMessageDialog(null, msg, title, JOptionPane.INFORMATION_MESSAGE);
 
     }
-
     public static boolean confirm(String str){
         optionPaneTR();
         String msg;
@@ -55,11 +56,11 @@ public class Helper {
         }
         return JOptionPane.showConfirmDialog(null,msg,"Emin misin?", JOptionPane.YES_NO_OPTION) == 0;
     }
-    public static boolean isFieldEmpty(JTextField field){
+
+    public static boolean isFieldEmpty(JTextField field){ //metin alanlarının boş olup olmadığının kontrolü
         return field.getText().trim().isEmpty();
     }
-
-    public static boolean isFieldListEmpty(JTextField[] fieldList){
+    public static boolean isFieldListEmpty(JTextField[] fieldList){ //listenin boş olup olmadığının kontrolü
         for (JTextField field: fieldList){
             if (isFieldEmpty(field)){
                 return true;
@@ -67,14 +68,14 @@ public class Helper {
         }
         return false;
     }
-    public static int getLocationPoint(String type, Dimension size){
+    public static int getLocationPoint(String type, Dimension size){ //çıkacak pencereleri ekranın ortasına sabitler
         return switch (type) {
             case "x" -> (Toolkit.getDefaultToolkit().getScreenSize().width - size.width) / 2;
             case "y" -> (Toolkit.getDefaultToolkit().getScreenSize().height - size.height) / 2;
             default -> 0;
         };
     }
-    public static void optionPaneTR(){ //butonlardaki ingilizce uyarıları türkçe verir
+    public static void optionPaneTR(){ //butonlardaki ingilizce uyarıları türkçeleştirme
         UIManager.put("OptionPane.okButtonText", "Tamam");
         UIManager.put("OptionPane.yesButtonText", "Evet");
         UIManager.put("OptionPane.noButtonText", "Hayır");

@@ -14,4 +14,5 @@ public class App {
         AdminView adminView = new AdminView(userManager.findByLogin("admin", "1234"));
        // LoginView loginView = new LoginView();
     }
+    
 }

@@ -15,7 +15,9 @@ public class ModelManager {
         return this.modelDao.findAll();
     }
     public ArrayList<Object[]> getForTable(int size, ArrayList<Model> modelList) {
+
         ArrayList<Object[]> modelObjList = new ArrayList<>();
+
         for (Model obj : modelList) {
             int i = 0;
             Object[] rowObject = new Object[size];
@@ -46,8 +48,6 @@ public class ModelManager {
         }
         return this.modelDao.update(model);
     }
-
-    // Delete a model by its ID
     public boolean delete(int id) {
         // Check if the model with the given ID exists before deleting
         if (this.getById(id) == null) {
@@ -59,48 +59,44 @@ public class ModelManager {
     public ArrayList<Model> getByListBrandId(int brandId) {
         return this.modelDao.getByListBrandId(brandId);
     }
-
-    /*// Get models by Brand ID
-
-
-    // Search for models based on criteria for table display
     public ArrayList<Model> searchForTable(int brandId, Model.Fuel fuel, Model.Gear gear, Model.Type type) {
-        // Base query to select models
+        //filtrelenmiş modelleri veritabanından elde etme
         String select = "SELECT * FROM public.model";
-
-        // List to store conditions for WHERE clause
         ArrayList<String> whereList = new ArrayList<>();
 
-        // Add condition for Brand ID
         if (brandId != 0) {
             whereList.add("model_brand_id = " + brandId);
         }
-
-        // Add conditions for Fuel, Gear, and Type
         if (fuel != null) {
             whereList.add("model_fuel = '" + fuel.toString() + "'");
         }
-
         if (gear != null) {
             whereList.add("model_gear = '" + gear.toString() + "'");
         }
-
         if (type != null) {
             whereList.add("model_type = '" + type.toString() + "'");
         }
-
-        // Concatenate WHERE conditions
         String whereStr = String.join(" AND ", whereList);
         String query = select;
 
-        // Add WHERE conditions to the base query
-        if (whereStr.length() > 0) {
-            query += " WHERE " + whereStr;
+        if (whereStr.length() > 0) { //içinde değer varsa
+            query += " WHERE " + whereStr; //özel query oluşturma
         }
 
-        // Execute query to get a list of searched models
-        return this.modelDao.selectByQuery(query);
+        return this.modelDao.selectByQuery(query); //query e göre veri döndürme
     }
-    */
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

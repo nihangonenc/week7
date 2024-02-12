@@ -6,14 +6,16 @@ import Dao.UserDao;
 import Entity.Brand;
 import Entity.Model;
 
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class BrandManager {
     private final BrandDao brandDao;
     private final ModelManager modelManager;
 
     public BrandManager() {
-
         this.brandDao = new BrandDao();
         this.modelManager = new ModelManager();
     }
@@ -32,20 +34,20 @@ public class BrandManager {
         return this.brandDao.findAll();
     }
     public boolean save(Brand brand){
-        if(brand.getId() != 0){
+        if(brand.getId() != 0){ //
             Helper.showMsg("error");
         }
         return this.brandDao.save(brand);
     }
     public Brand getById(int id){
         return this.brandDao.getById(id);
-    }
+    } //daodaki metodu uygula
     public boolean update(Brand brand){
-        if (this.getById(brand.getId()) == null){
+        if (this.getById(brand.getId()) == null){ //eşleşen id yoksa bulunamadı mesajı
             Helper.showMsg("notFound");
 
         }
-        return this.brandDao.update(brand);
+        return this.brandDao.update(brand); //uygun bir id ise daodaki metodu uygula
     }
     public boolean delete(int id){
         if (this.getById(id) == null){ //veritabanında böyle bir row yoksa
@@ -55,6 +57,7 @@ public class BrandManager {
         for (Model model : this.modelManager.getByListBrandId(id)) { //markalar kısmında marka silince o markaya ait modeller de siliniyor
             this.modelManager.delete(model.getId());
         }
-        return this.brandDao.delete(id); // veri varsa bunu uygular
+        return this.brandDao.delete(id); // veri varsa daoda yaptığımız metodu uygular
     }
+
 }

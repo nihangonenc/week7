@@ -13,7 +13,7 @@ public class UserDao {
 
         this.con = Db.getInstance();
     }
-    public ArrayList<User> findAll(){
+    public ArrayList<User> findAll(){ //veritabanından tüm user kayıtları çekip arraylistte depoladık
         ArrayList<User> userList = new ArrayList<>();
         String sql = "SELECT * FROM public.user";
         try {
@@ -27,7 +27,7 @@ public class UserDao {
         return userList;
 
     }
-    public User findByLogin(String username, String password){
+    public User findByLogin(String username, String password){ // belirli kullanıcı adı ve şifreye sahip kullanıcıyı temsil eden bir User nesnesi döndürür
         User obj = null;
         String query = "SELECT * FROM public.user WHERE user_name = ? AND user_pass = ?";
         try {
@@ -43,7 +43,7 @@ public class UserDao {
         }
         return obj;
     }
-    public User match(ResultSet rs) throws SQLException {
+    public User match(ResultSet rs) throws SQLException { //database verisinden entity verisine dönüştürme
         User obj = new User();
         obj.setId(rs.getInt("user_id"));
         obj.setUsername(rs.getString("user_name"));
@@ -52,3 +52,4 @@ public class UserDao {
         return obj;
     }
 }
+

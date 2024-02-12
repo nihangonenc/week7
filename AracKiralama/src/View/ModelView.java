@@ -36,7 +36,7 @@ public class ModelView extends Layout{
         this.cmb_model_type.setModel(new DefaultComboBoxModel<>(Model.Type.values())); //model ekle penceresinde model tipleri çıkar
         //bütün verileri almış olduk
 
-        if (this.model.getId() != 0){
+        if (this.model.getId() != 0){ //tablo isimleriyle değişkenleri eşledik
             this.fld_model_year.setText(this.model.getYear());
             this.fld_model_name.setText(this.model.getName());
             this.cmb_model_fuel.getModel().setSelectedItem(this.model.getFuel());
@@ -49,7 +49,7 @@ public class ModelView extends Layout{
         this.btn_model_save.addActionListener(e -> {
 
             if (Helper.isFieldListEmpty(new JTextField[]{this.fld_model_name, this.fld_model_year})) {
-                Helper.showMsg("fill");
+                Helper.showMsg("fill"); //boş veride uyarı mesajı verir
             } else {
                 boolean result;
                 ComboItem selectedBrand= (ComboItem) cmb_brand.getSelectedItem();

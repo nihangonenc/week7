@@ -1,7 +1,6 @@
 package Core;
 
 public class ComboItem {
-
     private int key;
     private String value;
     public ComboItem(int key, String value) {
